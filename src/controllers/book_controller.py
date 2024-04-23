@@ -1,7 +1,7 @@
 from tkinter import END
 
 from src.models.book import Book
-from src.repositories.book_repository import add_book, get_books
+from src.repositories.book_repository import add_book, get_books, get_book
 
 
 def add_new_book(title, author, year, isbn):
@@ -34,3 +34,17 @@ def get_all_books(data_list):
     print("Start passing data to book repository")
 
     print("End passing data to book repository")
+
+
+def get_single_book(data_list, book_isbn):
+    data_list.delete(0, END)
+    print("Start getting book  from database")
+
+    print("End passing data to Book model")
+    book = get_book(book_isbn.get())
+    if book is None:
+        print("No book found with the given ISBN")
+        return
+    data_list.delete(0, END)
+    data_list.insert(END, ["ID", "Title", "Author", "Year", "ISBN"])
+    data_list.insert(END, book)

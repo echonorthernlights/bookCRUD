@@ -5,7 +5,7 @@ from src.views.components.entry import create_entry
 from src.views.components.listbox import create_listbox
 from src.views.components.scrollbar import create_scrollbar
 from src.views.components.button import create_button
-from src.controllers.book_controller import add_new_book, get_all_books
+from src.controllers.book_controller import add_new_book, get_all_books, get_single_book
 
 
 def create_frame(rt):
@@ -34,7 +34,7 @@ data_list = create_listbox(frame, {"row": 2, "column": 0},
 create_scrollbar(frame, data_list, row=2, column=2)
 
 create_button(frame, cmd=lambda: get_all_books(data_list), text="Select All", position={"row": 2, "column": 3})
-# create_button(frame, cmd=None, text="Select One", position={"row": 3, "column": 3})
+create_button(frame, cmd=lambda: get_single_book(data_list, book_isbn=isbn_entry), text="Select One", position={"row": 3, "column": 3})
 create_button(frame, cmd=lambda: add_new_book(title_entry,
                                               author_entry,
                                               year_entry,

@@ -35,3 +35,22 @@ def get_books():
     except Exception as error:
         print("Error : ", error)
 
+
+def get_book(book_id):
+
+    try:
+        connection = connect_to_db()
+        query = "SELECT * FROM books WHERE isbn=%s"
+        cursor = connection.cursor()
+
+        cursor.execute(query, (book_id,))
+        book = cursor.fetchone()
+        connection.commit()
+
+        print("Book returned successfully !")
+        connection.close()
+        return book
+    except Exception as error:
+        print("Error : ", error)
+
+
