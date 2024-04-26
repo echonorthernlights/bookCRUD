@@ -1,7 +1,7 @@
 from tkinter import END
 
 from src.models.book import Book
-from src.repositories.book_repository import add_book, get_books, get_book
+from src.repositories.book_repository import add_book, get_books, get_book, update_book, delete_book
 
 
 def add_new_book(title, author, year, isbn):
@@ -48,3 +48,19 @@ def get_single_book(data_list, book_isbn):
     data_list.delete(0, END)
     data_list.insert(END, ["ID", "Title", "Author", "Year", "ISBN"])
     data_list.insert(END, book)
+
+
+def update_single_book(title, author, year, isbn, book_id):
+    print("Start passing data to Book model")
+    book = Book(title=title.get(), author=author.get(), year=year.get(), isbn=isbn.get())
+    print("End passing data to Book model")
+    print("Start passing data to book repository")
+    update_book(book, book_id.get())
+    print("End passing data to book repository")
+
+
+def delete_single_book(book_id):
+    result = delete_book(book_id.get())
+    return result
+
+

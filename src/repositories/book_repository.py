@@ -54,3 +54,35 @@ def get_book(book_id):
         print("Error : ", error)
 
 
+def update_book(book, book_id):
+
+    try:
+        connection = connect_to_db()
+        query = "UPDATE books SET title=%s, author=%s, year=%s, isbn=%s  WHERE id=%s"
+        cursor = connection.cursor()
+
+        cursor.execute(query, (book.title, book.author, book.year, book.isbn, book_id,))
+        connection.commit()
+
+        print("Book updated successfully !")
+        connection.close()
+        return 0
+    except Exception as error:
+        print("Error : ", error)
+
+
+def delete_book(book_id):
+
+    try:
+        connection = connect_to_db()
+        query = "DELETE FROM books WHERE id=%s"
+        cursor = connection.cursor()
+
+        cursor.execute(query, (book_id,))
+        connection.commit()
+
+        print("Book deleted successfully !")
+        connection.close()
+        return 0
+    except Exception as error:
+        print("Error : ", error)
